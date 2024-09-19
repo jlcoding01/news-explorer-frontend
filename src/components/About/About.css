@@ -1,0 +1,39 @@
+.about {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 56px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.about__avatar {
+  max-width: 464px;
+  height: auto;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.about__description {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+}
+
+.about__description_title {
+  margin: 0;
+  font-family: "Roboto Slab";
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+}
+
+.about__description_content {
+  margin: 0;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
