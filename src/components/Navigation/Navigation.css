@@ -10,12 +10,28 @@
   color: #fff;
 }
 
-.navigation__home {
+.navigation__btn-home {
   margin: 0;
+  border: none;
+  background-color: transparent;
+  color: #fff;
   cursor: pointer;
 }
 
-.navigation__btn-signin {
+.navigation__btn_hidden {
+  display: none;
+}
+
+.navigation__btn-profile {
+  display: flex;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navigation__btn-loggin {
   width: 176px;
   padding: 12px;
   border: 1px solid #fff;
@@ -23,4 +39,22 @@
   border-radius: 100px;
   color: #fff;
   cursor: pointer;
+}
+
+.navigation__btn-logout {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 112px;
+  padding: 12px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  border-radius: 100px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.icon-logout {
+  width: 24px;
+  height: 24px;
 }
