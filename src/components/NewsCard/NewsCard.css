@@ -1,0 +1,86 @@
+.cardItem {
+  list-style-type: none;
+  max-width: 400px;
+  /* height: 576px; */
+  aspect-ratio: 1/1.44;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.cardItem__img {
+  width: 100%;
+  aspect-ratio: 1/0.68;
+}
+
+.cardIte__btn-save {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 24px;
+  right: 24px;
+  border: none;
+  background: url("../../assets/save-btn-normal.svg");
+}
+
+.cardItem__content {
+  margin: 20px 24px 24px 24px;
+}
+
+.cardItem__content_date {
+  margin: 0 0 12px 0;
+  font-family: Roboto;
+  font-size: 1.25vw;
+  /* font-size: 18px; */
+  font-weight: 400;
+  line-height: 1.67vw;
+  /* line-height: 24px; */
+  text-align: left;
+  color: #b6bcbf;
+}
+
+.cardItem__content_headline {
+  margin: 0 0 16px 0;
+  font-family: "Roboto Slab";
+  font-size: 1.8vw;
+  /* font-size: 26px; */
+  font-weight: 400;
+  line-height: 2vw;
+  /* line-height: 30px; */
+  text-align: left;
+  color: #1a1b22;
+}
+
+.cardItem__content_brief {
+  margin: 0 0 18px 0;
+  font-family: Roboto;
+  font-size: 1.1vw;
+  /* font-size: 16px; */
+  font-weight: 400;
+  line-height: 1.5vw;
+  /* line-height: 22px; */
+  text-align: left;
+  color: #1a1b22;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  /* word-break: break-word; */
+}
+
+.cardItem__content_src {
+  margin: 0;
+  font-family: Roboto Slab;
+  font-size: 1.1vw;
+  /* font-size: 16px; */
+  font-weight: 700;
+  line-height: 1.4vw;
+  /* line-height: 20px; */
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #b6bcbf;
+}

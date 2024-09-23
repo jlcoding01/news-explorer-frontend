@@ -1,0 +1,31 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  background-color: #f5f6f7;
+  margin: 0 -104px;
+  padding: 80px 104px;
+}
+
+.main__title {
+  margin: 0;
+  font-family: Roboto Slab;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  text-align: left;
+}
+
+.main__btn {
+  align-self: center;
+  width: 288px;
+  height: 64px;
+  border: none;
+  border-radius: 100px;
+  background: #e8e8e8;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
