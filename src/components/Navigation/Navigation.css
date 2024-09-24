@@ -7,15 +7,29 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+  color: inherit;
+}
+
+/* .navigation_home {
   color: #fff;
 }
+
+.navigation_saved-news {
+  color: black;
+} */
 
 .navigation__btn-home {
   margin: 0;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: inherit;
   cursor: pointer;
+}
+
+.navigation__btn-home_highlight {
+  margin: -22px;
+  padding: 22px;
+  border-bottom: 3px solid #fff;
 }
 
 .navigation__btn_hidden {
@@ -27,17 +41,23 @@
   margin: 0;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: inherit;
   cursor: pointer;
+}
+
+.navigation__btn-profile_highlight {
+  margin: -22px;
+  padding: 22px;
+  border-bottom: 3px solid #1a1b22;
 }
 
 .navigation__btn-loggin {
   width: 176px;
   padding: 12px;
-  border: 1px solid #fff;
+  border: 1px solid white;
   background-color: transparent;
   border-radius: 100px;
-  color: #fff;
+  color: inherit;
   cursor: pointer;
 }
 
@@ -47,11 +67,15 @@
   align-items: center;
   width: 112px;
   padding: 12px;
-  border: 1px solid #fff;
+  border: 1px solid white;
   background-color: transparent;
   border-radius: 100px;
-  color: #fff;
+  color: inherit;
   cursor: pointer;
+}
+
+.navigation__btn_saved-news {
+  border-color: black;
 }
 
 .icon-logout {

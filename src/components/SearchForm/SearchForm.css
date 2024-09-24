@@ -1,15 +1,20 @@
-/* .search {
-  background-image: url("../../assets/georgia-de-lotz--UsJoNxLaNo-unsplash.png");
+.search {
+  margin: -78px -104px -80px;
+  padding: 78px 104px 80px;
+  background-image: url("../../assets/background.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-} */
+  z-index: 0;
+}
+
 .search-form {
   margin: 0 auto;
   width: 608px;
   max-width: 100%;
   color: #fff;
 }
+
 .search-form__title {
   margin: 80px 0 32px 0;
   font-family: "Roboto Slab";

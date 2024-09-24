@@ -1,7 +1,6 @@
 .cardItem {
   list-style-type: none;
   max-width: 400px;
-  /* height: 576px; */
   aspect-ratio: 1/1.44;
   border-radius: 20px;
   overflow: hidden;
@@ -15,14 +14,50 @@
   aspect-ratio: 1/0.68;
 }
 
-.cardIte__btn-save {
+.cardItem__label {
+  padding: 8px 22px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  height: 24px;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+.cardItem__label_hidden {
+  display: none;
+}
+
+.cardItem__btn {
   position: absolute;
   width: 40px;
   height: 40px;
   top: 24px;
   right: 24px;
   border: none;
+  cursor: pointer;
+}
+
+.cardItem__btn-save {
   background: url("../../assets/save-btn-normal.svg");
+}
+
+.cardItem__btn-save:hover {
+  background: url("../../assets/save-btn-hover.svg");
+}
+
+.cardItem__btn-delete {
+  background: url("../../assets/delete-btn-normal.svg");
+}
+
+.cardItem__btn-delete:hover {
+  background: url("../../assets/delete-btn-hover.svg");
 }
 
 .cardItem__content {

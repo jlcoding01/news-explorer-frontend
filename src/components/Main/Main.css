@@ -1,4 +1,4 @@
-.main {
+.search__result {
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -7,7 +7,7 @@
   padding: 80px 104px;
 }
 
-.main__title {
+.search__result_title {
   margin: 0;
   font-family: Roboto Slab;
   font-size: 40px;
@@ -16,7 +16,7 @@
   text-align: left;
 }
 
-.main__btn {
+.search__result_btn {
   align-self: center;
   width: 288px;
   height: 64px;

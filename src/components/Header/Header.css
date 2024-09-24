@@ -1,11 +1,21 @@
 .header {
-  padding: 19px 0 8px;
+  margin: 0 -104px;
+  padding: 19px 104px 8px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  /* color: #fff; */
+  border-bottom: 1px solid rgba(196, 196, 196);
+  z-index: 999;
+}
+
+.header_saved-news {
+  color: black;
+}
+
+.header_home {
   color: #fff;
-  border-bottom: 1px solid rgba(196, 196, 196, 0.01);
 }
 
 .header__logo {
