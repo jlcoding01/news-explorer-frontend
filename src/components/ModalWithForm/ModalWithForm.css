@@ -1,0 +1,109 @@
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  transition: visibility 0.4s, opacity 0.4s linear;
+  z-index: 999;
+}
+
+.modal__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: auto;
+  padding: 34px 36px 28px;
+  max-width: 430px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 16px;
+  font-family: Roboto;
+}
+
+.modal__btn-close {
+  background: url("../../assets/btn-close.svg") transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
+}
+
+.modal__title {
+  max-width: 315px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 28px;
+  margin-bottom: 22px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__form_hidden {
+  display: none;
+}
+
+.modal__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.5px;
+}
+
+.modal__form_btn-submit {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  padding: 20px 115px;
+  background-color: #2f71e5;
+  border: none;
+  border-radius: 100px;
+  margin-top: 39px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.modal__form_btn-submit:disabled {
+  background-color: #e6e8eb;
+  cursor: default;
+}
+
+.modal__form_navi {
+  align-self: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.modal__form_navi-text {
+  color: #2f71e5;
+  cursor: pointer;
+}
+
+.modal__redirect {
+  margin: 0;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #2f71e5;
+}
