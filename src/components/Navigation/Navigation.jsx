@@ -3,7 +3,7 @@ import iconWhite from "../../assets/logout-white.svg";
 import iconBlack from "../../assets/logout-black.svg";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn = true }) {
+function Navigation({ isLoggedIn = false, handleLoginModalOpen }) {
   const location = useLocation();
   const btnClass =
     location.pathname === "/saved-news" && "navigation__btn_saved-news";
@@ -43,6 +43,7 @@ function Navigation({ isLoggedIn = true }) {
           isLoggedIn === true && "navigation__btn_hidden"
         } ${btnClass}`}
         type="button"
+        onClick={handleLoginModalOpen}
       >
         Sign in
       </button>

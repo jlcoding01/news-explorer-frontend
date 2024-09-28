@@ -7,8 +7,15 @@
   right: 0;
   display: flex;
   align-items: center;
+  visibility: hidden;
+  opacity: 0;
   transition: visibility 0.4s, opacity 0.4s linear;
   z-index: 999;
+}
+
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
@@ -106,4 +113,5 @@
   font-weight: 400;
   line-height: 22px;
   color: #2f71e5;
+  cursor: pointer;
 }
