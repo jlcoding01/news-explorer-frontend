@@ -1,7 +1,21 @@
+import { useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
+
 import "./FormElement.css";
 
-function FormElement({ name, type }) {
+function FormElement({ name, type, isOpen }) {
   const nameLowerCase = name.toLowerCase();
+
+  const { values, setValues, handleValueChange } = useForm({});
+
+  const handleReset = () => {
+    setValues({});
+  };
+
+  useEffect(() => {
+    handleReset();
+  }, [isOpen]);
+
   return (
     <>
       <div className="form__element">
@@ -17,6 +31,8 @@ function FormElement({ name, type }) {
           placeholder={`Enter ${nameLowerCase}`}
           name={nameLowerCase}
           id={`${nameLowerCase}-${type}`}
+          value={values[nameLowerCase] || ""}
+          onChange={handleValueChange}
           required
         />
       </div>

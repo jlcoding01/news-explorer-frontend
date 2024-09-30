@@ -21,7 +21,6 @@ function ModalWithForm({
         ></button>
         <h2 className="modal__title">{title}</h2>
         <form
-          //   action=""
           className={`modal__form ${
             isConfirmModal === "true" && "modal__form_hidden"
           }`}
