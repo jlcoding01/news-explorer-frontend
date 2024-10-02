@@ -10,6 +10,7 @@ function ModalWithForm({
   redirectText,
   handleModalClose,
   handleModalToggle,
+  isBtnDisabled,
 }) {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -26,7 +27,11 @@ function ModalWithForm({
           }`}
         >
           <fieldset className="modal__fieldset">{children}</fieldset>
-          <button className="modal__form_btn-submit" type="submit">
+          <button
+            className="modal__form_btn-submit"
+            type="submit"
+            disabled={isBtnDisabled}
+          >
             {buttonText}
           </button>
           <div className="modal__form_navi">

@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm";
 
 import "./FormElement.css";
 
-function FormElement({ name, type, isOpen }) {
+function FormElement({ name, type, isOpen, onFormValidity }) {
   const nameLowerCase = name.toLowerCase();
 
   const { values, setValues, handleValueChange } = useForm({});
@@ -15,6 +15,18 @@ function FormElement({ name, type, isOpen }) {
   useEffect(() => {
     handleReset();
   }, [isOpen]);
+
+  // console.log(typeof onFormValidity);
+
+  useEffect(() => {
+    const isValid =
+      values[nameLowerCase]?.trim() !== "" &&
+      values[nameLowerCase] !== undefined;
+
+    if (typeof onFormValidity === "function") {
+      onFormValidity(isValid);
+    }
+  }, [isOpen, values, nameLowerCase, onFormValidity]);
 
   return (
     <>
