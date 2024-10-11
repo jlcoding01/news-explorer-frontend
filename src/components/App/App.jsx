@@ -7,6 +7,7 @@ import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RigisterModal from "../RigisterModal/RigisterModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import MenuModal from "../MenuModal/MenuModal";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
   const handleModalClose = () => {
     setActiveModal("");
+    document.body.style.overflow = "";
   };
 
   const handleLoginModalOpen = () => {
@@ -30,8 +32,13 @@ function App() {
       : handleLoginModalOpen();
   };
 
-  const handelConfirmModalOpen = () => {
+  const handleConfirmModalOpen = () => {
     setActiveModal("rigister-confirmed");
+  };
+
+  const handleMenuModalOpen = () => {
+    setActiveModal("menu");
+    document.body.style.overflow = "hidden";
   };
 
   useEffect(() => {
@@ -64,7 +71,10 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleLoginModalOpen={handleLoginModalOpen} />
+        <Header
+          handleLoginModalOpen={handleLoginModalOpen}
+          handleMenuModalOpen={handleMenuModalOpen}
+        />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/saved-news" element={<SavedNews />} />
@@ -85,6 +95,11 @@ function App() {
         <ConfirmationModal
           isOpen={activeModal === "rigister-confirmed"}
           handleModalToggle={handleModalToggle}
+        />
+        <MenuModal
+          isOpen={activeModal === "menu"}
+          handleModalClose={handleModalClose}
+          handleLoginModalOpen={handleLoginModalOpen}
         />
       </div>
     </div>

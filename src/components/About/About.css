@@ -8,7 +8,8 @@
 }
 
 .about__avatar {
-  max-width: 464px;
+  max-width: 32vw;
+  min-width: 232px;
   height: auto;
   width: 100%;
   aspect-ratio: 1/1;
@@ -36,4 +37,18 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
+}
+
+@media screen and (max-width: 550px) {
+  .about {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .about__description_title {
+    font-size: 30px;
+    line-height: 40px;
+  }
 }

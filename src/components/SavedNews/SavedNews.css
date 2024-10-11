@@ -1,5 +1,12 @@
 .savednews__result {
   background-color: #f5f6f7;
-  margin: 0 -104px;
-  padding: 62px 104px;
+  margin: 0 -7.22vw;
+  padding: 62px 7.22vw;
+}
+
+@media screen and (max-width: 550px) {
+  .savednews__result {
+    margin: 0 -16px;
+    padding: 62px 16px;
+  }
 }

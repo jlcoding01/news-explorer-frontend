@@ -1,3 +1,4 @@
+import Modal from "../Modal/Modal";
 import "./ModalWithForm.css";
 
 function ModalWithForm({
@@ -13,39 +14,32 @@ function ModalWithForm({
   isBtnDisabled,
 }) {
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`}>
-      <div className="modal__container">
+    <Modal isOpen={isOpen} handleModalClose={handleModalClose}>
+      <h2 className="modal__title">{title}</h2>
+      <form
+        className={`modal__form ${
+          isConfirmModal === "true" && "modal__form_hidden"
+        }`}
+      >
+        <fieldset className="modal__fieldset">{children}</fieldset>
         <button
-          className="modal__btn-close"
-          type="button"
-          onClick={handleModalClose}
-        ></button>
-        <h2 className="modal__title">{title}</h2>
-        <form
-          className={`modal__form ${
-            isConfirmModal === "true" && "modal__form_hidden"
-          }`}
+          className="modal__form_btn-submit"
+          type="submit"
+          disabled={isBtnDisabled}
         >
-          <fieldset className="modal__fieldset">{children}</fieldset>
-          <button
-            className="modal__form_btn-submit"
-            type="submit"
-            disabled={isBtnDisabled}
-          >
-            {buttonText}
-          </button>
-          <div className="modal__form_navi">
-            or{" "}
-            <span className="modal__form_navi-text" onClick={handleModalToggle}>
-              {naviText}
-            </span>
-          </div>
-        </form>
-        <p className="modal__redirect" onClick={handleModalToggle}>
-          {redirectText}
-        </p>
-      </div>
-    </div>
+          {buttonText}
+        </button>
+        <div className="modal__form_navi">
+          or{" "}
+          <span className="modal__form_navi-text" onClick={handleModalToggle}>
+            {naviText}
+          </span>
+        </div>
+      </form>
+      <p className="modal__redirect" onClick={handleModalToggle}>
+        {redirectText}
+      </p>
+    </Modal>
   );
 }
 

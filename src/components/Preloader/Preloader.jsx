@@ -3,12 +3,12 @@ import "./Preloader.css";
 
 function Preloader() {
   return (
-    <div className="preloader">
+    <div className="preloader preloader_hidden">
       <div className="preloader__loading">
         <div className="circle-preloader"></div>
         <p className="preloader__loading_msg"> Search for news...</p>
       </div>
-      <div className="preloader__no-result">
+      <div className="preloader__no-result preloader__no-result_hidden">
         <img
           src={notFound}
           alt="not found"

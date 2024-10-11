@@ -1,14 +1,21 @@
 .navigation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 42px;
   font-family: "Roboto";
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
   color: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 42px;
 }
+
+/* .navgation__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 42px;
+} */
 
 /* .navigation_home {
   color: #fff;
@@ -49,6 +56,7 @@
   margin: -22px;
   padding: 22px;
   border-bottom: 3px solid #1a1b22;
+  width: 160px;
 }
 
 .navigation__btn-loggin {
@@ -81,4 +89,60 @@
 .icon-logout {
   width: 24px;
   height: 24px;
+}
+
+@media screen and (max-width: 700px) {
+  .navgation__container {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .navigation {
+    display: none;
+  }
+
+  .navigation__menu {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+  }
+
+  .navigation__btn-home {
+    padding: 0;
+  }
+  .navigation__btn-home_highlight {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navigation__btn-profile_highlight {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navigation__btn-profile {
+    padding: 0;
+  }
+
+  .navigation__btn-loggin {
+    width: 100%;
+  }
+
+  .navigation__btn-logout {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* .navigation__btn_saved-news {
+    border-color: white;
+  } */
+  /* .navgation__container {
+    display: flex;
+    flex-direction: column;
+  } */
 }

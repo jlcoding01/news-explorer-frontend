@@ -1,0 +1,26 @@
+.modal__container_menu {
+  /* background-color: black;
+  color: #fff; */
+  position: absolute;
+  height: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-radius: 0px 0px 16px 16px;
+  padding: 0;
+  overflow: hidden;
+}
+.modal__menu {
+  padding: 0px 16px 16px;
+}
+
+/* .header .modal__container_menu {
+  color: black;
+} */
+
+.menu__btn-close {
+  top: 10px;
+  right: 16px;
+  z-index: 2;
+  /* fill: currentColor; */
+}

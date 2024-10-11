@@ -3,7 +3,7 @@ import iconWhite from "../../assets/logout-white.svg";
 import iconBlack from "../../assets/logout-black.svg";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn = false, handleLoginModalOpen }) {
+function Navigation({ isLoggedIn = false, handleLoginModalOpen, isOpen }) {
   const location = useLocation();
   const btnClass =
     location.pathname === "/saved-news" && "navigation__btn_saved-news";
@@ -15,7 +15,7 @@ function Navigation({ isLoggedIn = false, handleLoginModalOpen }) {
     location.pathname === "/saved-news" && "navigation__btn-profile_highlight";
 
   return (
-    <div className="navigation">
+    <div className={`navigation ${isOpen && "navigation__menu"}`}>
       <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
         <button
           className={`navigation__btn-home ${homeBtnHighlight}`}

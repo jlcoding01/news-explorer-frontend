@@ -5,9 +5,7 @@ function SavedNewsHeader() {
     <div className="saved-news-header">
       <p className="saved-news-header__title">Saved articles</p>
       <h2 className="saved-news-header__summary">
-        Elise, you have 5 saved
-        <br />
-        articles
+        Elise, you have 5 saved articles
       </h2>
       <div className="saved-news-header__footer">
         By keywords:&nbsp;

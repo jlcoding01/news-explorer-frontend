@@ -1,7 +1,9 @@
 .cardItem {
+  padding-bottom: 24px;
   list-style-type: none;
   max-width: 400px;
-  aspect-ratio: 1/1.44;
+  /* aspect-ratio: 1/1.44; */
+  aspect-ratio: calc(1 / 0.68 + 300px);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
@@ -17,8 +19,10 @@
 .cardItem__label {
   padding: 8px 22px;
   position: absolute;
-  top: 24px;
-  left: 24px;
+  /* top: 24px;
+  left: 24px; */
+  top: 1.67vw;
+  left: 1.67vw;
   height: 24px;
   background-color: #fff;
   border: none;
@@ -38,8 +42,10 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 24px;
-  right: 24px;
+  /* top: 24px;
+  right: 24px; */
+  top: 1.67vw;
+  right: 1.67vw;
   border: none;
   cursor: pointer;
 }
@@ -61,7 +67,7 @@
 }
 
 .cardItem__content {
-  margin: 20px 24px 24px 24px;
+  padding: 20px 24px 0 24px;
 }
 
 .cardItem__content_date {
@@ -79,23 +85,27 @@
 .cardItem__content_headline {
   margin: 0 0 16px 0;
   font-family: "Roboto Slab";
-  font-size: 1.8vw;
-  /* font-size: 26px; */
+  font-size: 26px;
+  line-height: 30px;
   font-weight: 400;
-  line-height: 2vw;
-  /* line-height: 30px; */
   text-align: left;
   color: #1a1b22;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .cardItem__content_brief {
   margin: 0 0 18px 0;
+  height: 88px;
   font-family: Roboto;
-  font-size: 1.1vw;
-  /* font-size: 16px; */
+  /* font-size: 1.1vw; */
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.5vw;
-  /* line-height: 22px; */
+  /* line-height: 1.5vw; */
+  line-height: 22px;
   text-align: left;
   color: #1a1b22;
   display: -webkit-box;
@@ -118,4 +128,25 @@
   letter-spacing: 0.4px;
   text-align: left;
   color: #b6bcbf;
+}
+
+@media screen and (max-width: 770px) {
+  .cardItem {
+    aspect-ratio: calc(1 / 0.68 + 270px);
+    padding-bottom: 18px;
+  }
+
+  .cardItem__content {
+    padding: 16px 16px 0 16px;
+  }
+
+  .cardItem__content_headline {
+    margin-bottom: 12px;
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .cardItem__content_brief {
+    margin-bottom: 12px;
+  }
 }
