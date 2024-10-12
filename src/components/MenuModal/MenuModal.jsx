@@ -13,6 +13,21 @@ function MenuModal({ isOpen, handleModalClose, handleLoginModalOpen }) {
     }
   }, [location]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 550 && isOpen) {
+        handleModalClose();
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isOpen]);
+
+  const path = location.pathname === "/saved-news" && "saved-news";
+
   const toggleMenuStyle = () => {
     switch (location.pathname) {
       case "/saved-news":
@@ -24,7 +39,12 @@ function MenuModal({ isOpen, handleModalClose, handleLoginModalOpen }) {
   };
 
   return (
-    <Modal isOpen={isOpen} type="menu" handleModalClose={handleModalClose}>
+    <Modal
+      isOpen={isOpen}
+      type="menu"
+      handleModalClose={handleModalClose}
+      path={path}
+    >
       <div className="modal__menu" style={toggleMenuStyle()}>
         <Header isHidden={isOpen} />
         <Navigation
