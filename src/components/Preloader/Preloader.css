@@ -1,6 +1,6 @@
 .preloader {
   position: relative;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 24px;
@@ -10,13 +10,18 @@
   padding: 80px 7.22vw;
 }
 
-.preloader_hidden {
-  display: none;
+.preloader_active {
+  display: flex;
 }
 
 .preloader__loading {
   display: none;
 }
+
+.preloader__loading_active {
+  display: flex;
+}
+
 .circle-preloader {
   display: block;
   width: 50px;
@@ -54,14 +59,14 @@
 }
 
 .preloader__no-result {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
 
-/* .preloader__no-result_hidden {
-  display: none;
-} */
+.preloader__no-result_active {
+  display: flex;
+}
 
 .preloader__no-result_img {
   margin-bottom: 32px;

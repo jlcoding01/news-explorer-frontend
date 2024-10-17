@@ -8,10 +8,21 @@ import LoginModal from "../LoginModal/LoginModal";
 import RigisterModal from "../RigisterModal/RigisterModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import MenuModal from "../MenuModal/MenuModal";
+import { apiKey } from "../../utils/constants";
+import { newsApi, processData } from "../../utils/NewsApi";
 import "./App.css";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const [newsItems, setNewsItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [itemCount, setItemCount] = useState(3);
 
   const handleModalClose = () => {
     setActiveModal("");
@@ -40,6 +51,45 @@ function App() {
     setActiveModal("menu");
     document.body.style.overflow = "hidden";
   };
+
+  const handleSearchBtn = (keyword) => {
+    setKeyword(keyword);
+    setIsLoading(true);
+    setIsNotFound(false);
+    setIsError(false);
+  };
+
+  const handleSaveBtn = () => {
+    setIsSaved(!isSaved);
+  };
+
+  const handleShowMoreBtn = () => {
+    setItemCount((prev) => prev + 3);
+  };
+
+  useEffect(() => {
+    if (keyword.trim() !== "" && keyword !== undefined) {
+      newsApi(keyword, apiKey)
+        .then((data) => {
+          if (data.totalResults === 0) {
+            setIsNotFound(true);
+            setIsVisible(false);
+          } else {
+            const newsData = processData(data);
+            setNewsItems(newsData);
+            setIsVisible(true);
+            console.log(newsData);
+          }
+        })
+        .catch(() => {
+          console.error;
+          setIsError(true);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [keyword]);
 
   useEffect(() => {
     if (!activeModal) return;
@@ -74,10 +124,39 @@ function App() {
         <Header
           handleLoginModalOpen={handleLoginModalOpen}
           handleMenuModalOpen={handleMenuModalOpen}
+          isLoggedIn={isLoggedIn}
         />
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/saved-news" element={<SavedNews />} />
+          <Route
+            path="/"
+            element={
+              <Main
+                handleSearchBtn={handleSearchBtn}
+                newsItems={newsItems}
+                itemCount={itemCount}
+                setItemCount={setItemCount}
+                isVisible={isVisible}
+                isLoading={isLoading}
+                isNotFound={isNotFound}
+                isLoggedIn={isLoggedIn}
+                isError={isError}
+                isSaved={isSaved}
+                handleSaveBtn={handleSaveBtn}
+                handleShowMoreBtn={handleShowMoreBtn}
+              />
+            }
+          />
+          <Route
+            path="/saved-news"
+            element={
+              <SavedNews
+                newsItems={newsItems}
+                itemCount={itemCount}
+                isLoggedIn={isLoggedIn}
+                keyword={keyword}
+              />
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />

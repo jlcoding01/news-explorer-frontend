@@ -4,7 +4,7 @@ import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 
 function Header({
-  isLogging,
+  isLoggedIn,
   handleLoginModalOpen,
   handleMenuModalOpen,
   isHidden,
@@ -29,7 +29,10 @@ function Header({
         type="button"
         onClick={handleMenuModalOpen}
       ></button>
-      <Navigation handleLoginModalOpen={handleLoginModalOpen} />
+      <Navigation
+        handleLoginModalOpen={handleLoginModalOpen}
+        isLoggedIn={isLoggedIn}
+      />
     </header>
   );
 }

@@ -1,6 +1,28 @@
+import { useState, useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
 import "./SearchForm.css";
 
-function SearchForm() {
+function SearchForm({ handleSearchBtn, setItemCount }) {
+  const { values, setValues, handleValueChange } = useForm({});
+  const [isValid, setIsValid] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      handleSearchBtn(values["search"]);
+      setValues({});
+      setItemCount(3);
+    }
+  };
+
+  useEffect(() => {
+    if (values["search"] !== undefined && values["search"].trim() !== "") {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [values]);
+
   return (
     <div className="search">
       <div className="search-form">
@@ -9,15 +31,24 @@ function SearchForm() {
           Find the latest news on any topic and save them in your personal
           account.
         </p>
-        <div className="search-form__container">
+        <form className="search-form__container">
           <input
             type="text"
             className="search-form__input"
             placeholder="Enter Topic"
             name="search"
+            value={values["search"] || ""}
+            onChange={handleValueChange}
           />
-          <button className="search-form__btn">Search</button>
-        </div>
+          <button
+            className="search-form__btn"
+            type="submit"
+            onClick={handleSubmit}
+            disabled={!isValid}
+          >
+            Search
+          </button>
+        </form>
       </div>
     </div>
   );

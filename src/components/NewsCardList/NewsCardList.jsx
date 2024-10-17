@@ -1,11 +1,27 @@
 import NewsCard from "../NewsCard/NewsCard";
 import "./NewsCardList.css";
 
-function NewsCardList() {
+function NewsCardList({
+  newsItems,
+  itemCount,
+  isLoggedIn,
+  isSaved,
+  handleSaveBtn,
+  keyword,
+}) {
   return (
-    <div className="card__container">
-      <NewsCard />
-    </div>
+    <ul className="card__container">
+      {newsItems.slice(0, itemCount).map((item, index) => (
+        <NewsCard
+          key={`${item.title}-${index}`}
+          item={item}
+          isLoggedIn={isLoggedIn}
+          isSaved={isSaved}
+          handleSaveBtn={handleSaveBtn}
+          keyword={keyword}
+        />
+      ))}
+    </ul>
   );
 }
 
