@@ -5,6 +5,7 @@ import iconWhite from "../../assets/logout-white.svg";
 import iconBlack from "../../assets/logout-black.svg";
 import "./Navigation.css";
 
+
 function Navigation({
   isLoggedIn,
   handleLoginModalOpen,
@@ -13,7 +14,6 @@ function Navigation({
   handleLogOut,
 }) {
   const currentUser = useContext(CurrentUserContext);
-
   const location = useLocation();
   const btnClass =
     location.pathname === "/saved-news" && "navigation__btn_saved-news";
