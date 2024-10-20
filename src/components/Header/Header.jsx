@@ -8,6 +8,8 @@ function Header({
   handleLoginModalOpen,
   handleMenuModalOpen,
   isHidden,
+
+  handleLogOut,
 }) {
   const location = useLocation();
   const headerClass =
@@ -32,6 +34,7 @@ function Header({
       <Navigation
         handleLoginModalOpen={handleLoginModalOpen}
         isLoggedIn={isLoggedIn}
+        handleLogOut={handleLogOut}
       />
     </header>
   );

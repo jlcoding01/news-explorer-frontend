@@ -6,7 +6,9 @@ let oneWeekBefore = new Date(today.setDate(today.getDate() - 7))
   .toJSON()
   .slice(0, 10);
 
-// const itemID = new ObjectId().toHexString();
+// const itemID = Array.from({ length: 24 }, () =>
+//   Math.floor(Math.random() * 16).toString(16)
+// ).join("");
 
 export const newsApi = (keyword, apiKey) => {
   return request(
@@ -32,10 +34,15 @@ export const processData = (data) => {
         "en-US",
         { year: "numeric", month: "long", day: "numeric" }
       );
+      cardData.id = Array.from({ length: 24 }, () =>
+        Math.floor(Math.random() * 16).toString(16)
+      ).join("");
       cardData.title = item.title;
       cardData.description = item.description;
       cardData.urlToImage = item.urlToImage;
       cardData.name = item.source.name.toUpperCase();
+      cardData.isSaved = false;
+      cardData.keyword = "";
       result.push(cardData);
     }
   });

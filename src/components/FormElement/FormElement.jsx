@@ -3,18 +3,25 @@ import { useForm } from "../../hooks/useForm";
 
 import "./FormElement.css";
 
-function FormElement({ name, type, isOpen, onFormValidity }) {
+function FormElement({
+  name,
+  type,
+  isOpen,
+  onFormValidity,
+  values,
+  handleValueChange,
+}) {
   const nameLowerCase = name.toLowerCase();
 
-  const { values, setValues, handleValueChange } = useForm({});
+  // const { values, setValues, handleValueChange } = useForm({});
 
-  const handleReset = () => {
-    setValues({});
-  };
+  // const handleReset = () => {
+  //   setValues({});
+  // };
 
-  useEffect(() => {
-    handleReset();
-  }, [isOpen]);
+  // useEffect(() => {
+  //   handleReset();
+  // }, [isOpen]);
 
   // console.log(typeof onFormValidity);
 

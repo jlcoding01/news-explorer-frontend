@@ -1,9 +1,19 @@
 import { useLocation, Link } from "react-router-dom";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import iconWhite from "../../assets/logout-white.svg";
 import iconBlack from "../../assets/logout-black.svg";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn, handleLoginModalOpen, isOpen }) {
+function Navigation({
+  isLoggedIn,
+  handleLoginModalOpen,
+  isOpen,
+
+  handleLogOut,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+
   const location = useLocation();
   const btnClass =
     location.pathname === "/saved-news" && "navigation__btn_saved-news";
@@ -13,7 +23,7 @@ function Navigation({ isLoggedIn, handleLoginModalOpen, isOpen }) {
     location.pathname === "/" && "navigation__btn-home_highlight";
   const profileBtnHighlight =
     location.pathname === "/saved-news" && "navigation__btn-profile_highlight";
-
+  // console.log(currentUser);
   return (
     <div className={`navigation ${isOpen && "navigation__menu"}`}>
       <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
@@ -52,8 +62,9 @@ function Navigation({ isLoggedIn, handleLoginModalOpen, isOpen }) {
           isLoggedIn === true && "navigation__btn-logout"
         } ${btnClass}`}
         type="button"
+        onClick={handleLogOut}
       >
-        Logout
+        {currentUser.name}
         <img src={iconLogout} className="icon-logout"></img>
       </button>
     </div>

@@ -12,6 +12,7 @@ function ModalWithForm({
   handleModalClose,
   handleModalToggle,
   isBtnDisabled,
+  onSubmit,
 }) {
   return (
     <Modal isOpen={isOpen} handleModalClose={handleModalClose}>
@@ -20,6 +21,7 @@ function ModalWithForm({
         className={`modal__form ${
           isConfirmModal === "true" && "modal__form_hidden"
         }`}
+        onSubmit={onSubmit}
       >
         <fieldset className="modal__fieldset">{children}</fieldset>
         <button

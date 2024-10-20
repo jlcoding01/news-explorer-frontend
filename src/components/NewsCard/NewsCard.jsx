@@ -1,8 +1,16 @@
 import { useLocation } from "react-router-dom";
 import "./NewsCard.css";
 
-function NewsCard({ item, isLoggedIn, isSaved, handleSaveBtn, keyword }) {
+function NewsCard({
+  item,
+  isLoggedIn,
+  handleSaveBtn,
+
+  handleDeleteBtn,
+}) {
   const location = useLocation();
+  // const id = item.id;
+  const { isSaved, id } = item;
 
   const cardBtnClassName =
     location.pathname === "/saved-news"
@@ -18,22 +26,26 @@ function NewsCard({ item, isLoggedIn, isSaved, handleSaveBtn, keyword }) {
     location.pathname === "/saved-news"
       ? "cardItem__label"
       : "cardItem__label_hidden";
-  // console.log(item.id);
 
   return (
     <>
       <li className="cardItem">
         <img src={item.urlToImage} alt="news image" className="cardItem__img" />
-        <div className={cardLabelClassName}>{keyword}</div>
+        <div className={cardLabelClassName}>{item.keyword}</div>
         <button
           className={`cardItem__btn ${!isHidden && "cardItem__btn-delete"}`}
           type="button"
+          onClick={() => {
+            handleDeleteBtn(id);
+          }}
         ></button>
         <button
           className={`cardItem__btn ${isHidden && saveBtnClass}`}
           type="button"
           disabled={!isLoggedIn}
-          onClick={handleSaveBtn}
+          onClick={() => {
+            handleSaveBtn(id);
+          }}
         ></button>
         <div
           className={`cardItem__msg ${isLoggedIn && "cardItem__msg_hidden"}`}

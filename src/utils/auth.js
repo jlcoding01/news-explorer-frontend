@@ -8,9 +8,10 @@ export const checkToken = (token) => {
   return new Promise((resolve, reject) => {
     resolve({
       data: {
-        name: "fake user",
+        name: "Jerry",
         email: "fake@example.com",
-        id: "fake-id",
+        password: "temp1234",
+        id: "id1234",
       },
     });
   });

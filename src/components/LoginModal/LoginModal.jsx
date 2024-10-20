@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import FormElement from "../FormElement/FormElement";
 
-function LoginModal({ isOpen, handleModalClose, handleModalToggle }) {
+function LoginModal({
+  isOpen,
+  handleModalClose,
+  handleModalToggle,
+  handleLogin,
+}) {
+  const { values, setValues, handleValueChange } = useForm({});
   const [isEmailValid, setIsEmailValid] = useState(false);
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -17,6 +24,19 @@ function LoginModal({ isOpen, handleModalClose, handleModalToggle }) {
 
   const isFormValid = isEmailValid && isPasswordValid;
 
+  const handleReset = () => {
+    setValues({});
+  };
+
+  useEffect(() => {
+    handleReset();
+  }, [isOpen]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(values);
+  };
+
   return (
     <ModalWithForm
       title="Sign in"
@@ -26,18 +46,23 @@ function LoginModal({ isOpen, handleModalClose, handleModalToggle }) {
       handleModalClose={handleModalClose}
       handleModalToggle={handleModalToggle}
       isBtnDisabled={!isFormValid}
+      onSubmit={handleSubmit}
     >
       <FormElement
         name="Email"
         type="signin"
         isOpen={isOpen}
         onFormValidity={handleEmailValidity}
+        values={values}
+        handleValueChange={handleValueChange}
       ></FormElement>
       <FormElement
         name="Password"
         type="signin"
         isOpen={isOpen}
         onFormValidity={handlePasswordValidity}
+        values={values}
+        handleValueChange={handleValueChange}
       ></FormElement>
     </ModalWithForm>
   );

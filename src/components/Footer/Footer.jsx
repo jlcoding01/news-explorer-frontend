@@ -22,11 +22,14 @@ function Footer() {
           </button>
         </div>
         <div className="footer__navibar_icon">
-          <img
-            src={iconGithub}
-            alt="github icon"
-            className="footer__navibar_icon-github"
-          />
+          <a href="https://github.com/jlcoding01" target="_blank">
+            <img
+              src={iconGithub}
+              alt="github icon"
+              className="footer__navibar_icon-github"
+            />
+          </a>
+
           <img
             src={iconFacebook}
             alt="facebook icon"

@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import FormElement from "../FormElement/FormElement";
 
 function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
+  const { values, setValues, handleValueChange } = useForm({});
+
   const [isEmailValid, setIsEmailValid] = useState(false);
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -23,6 +26,14 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
   };
   const isFormValid = isEmailValid && isPasswordValid && isUernameValid;
 
+  const handleReset = () => {
+    setValues({});
+  };
+
+  useEffect(() => {
+    handleReset();
+  }, [isOpen]);
+
   return (
     <ModalWithForm
       title="Sign up"
@@ -37,16 +48,22 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
         name="Email"
         type="signup"
         onFormValidity={handleEmailValidity}
+        values={values}
+        handleValueChange={handleValueChange}
       ></FormElement>
       <FormElement
         name="Password"
         type="signup"
         onFormValidity={handlePasswordValidity}
+        values={values}
+        handleValueChange={handleValueChange}
       ></FormElement>
       <FormElement
         name="Username"
         type="signup"
         onFormValidity={handleUserNameValidity}
+        values={values}
+        handleValueChange={handleValueChange}
       ></FormElement>
     </ModalWithForm>
   );

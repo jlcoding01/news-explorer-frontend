@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -10,19 +10,33 @@ import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import MenuModal from "../MenuModal/MenuModal";
 import { apiKey } from "../../utils/constants";
 import { newsApi, processData } from "../../utils/NewsApi";
+import { getItems } from "../../utils/api.js";
+import * as auth from "../../utils/auth.js";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import "./App.css";
 
 function App() {
+  const token = "Strong_TOKEN";
+  const navigate = useNavigate();
+
   const [activeModal, setActiveModal] = useState("");
   const [keyword, setKeyword] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [newsItems, setNewsItems] = useState([]);
+  const [savedNews, setSavedNews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
   const [itemCount, setItemCount] = useState(3);
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    id: "",
+  });
+
+  // console.log(currentUser);
 
   const handleModalClose = () => {
     setActiveModal("");
@@ -59,13 +73,101 @@ function App() {
     setIsError(false);
   };
 
-  const handleSaveBtn = () => {
-    setIsSaved(!isSaved);
+  // const handleSaveBtn = (id) => {
+  //   setNewsItems((items) => {
+  //     return items.map((item) =>
+  //       item.id === id ? { ...item, isSaved: !item.isSaved } : item
+  //     );
+  //   });
+  // };
+
+  const handleSaveBtn = (id) => {
+    setNewsItems((items) => {
+      const updatedNewsItem = items.map((item) =>
+        item.id === id ? { ...item, isSaved: !item.isSaved } : item
+      );
+
+      const updatedItem = updatedNewsItem.find((item) => item.id === id);
+
+      setSavedNews((items) => {
+        if (updatedItem.isSaved) {
+          if (!items.some((item) => item.id === updatedItem.id)) {
+            return [...items, updatedItem];
+          }
+        } else {
+          return items.filter((item) => item.id !== id);
+        }
+        return items;
+      });
+
+      return updatedNewsItem;
+    });
+  };
+
+  const handleDeleteBtn = (id) => {
+    setSavedNews((items) => {
+      return items.filter((item) => item.id !== id);
+    });
+    setNewsItems((items) => {
+      return items.map((item) =>
+        item.id === id ? { ...item, isSaved: !item.isSaved } : item
+      );
+    });
   };
 
   const handleShowMoreBtn = () => {
     setItemCount((prev) => prev + 3);
   };
+
+  const handleLogin = ({ email, password }) => {
+    if (!email || !password) {
+      return;
+    }
+
+    auth
+      .authorize(email, password)
+      .then((res) => {
+        console.log(res);
+        handleModalClose();
+        navigate("/");
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setCurrentUser({
+            name: "Jerry",
+            email: "fake@example.com",
+          });
+          setIsLoggedIn(true);
+        }
+      })
+      .catch(console.error);
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (!token) return;
+
+    auth
+      .checkToken(token)
+      .then((res) => {
+        setCurrentUser(res.data);
+        setIsLoggedIn(true);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setSavedNews(data);
+      })
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     if (keyword.trim() !== "" && keyword !== undefined) {
@@ -76,9 +178,13 @@ function App() {
             setIsVisible(false);
           } else {
             const newsData = processData(data);
-            setNewsItems(newsData);
+            const processedData = newsData.map((article) => ({
+              ...article,
+              keyword: keyword[0].toUpperCase() + keyword.slice(1),
+            }));
+            setNewsItems(processedData);
             setIsVisible(true);
-            console.log(newsData);
+            console.log(processedData);
           }
         })
         .catch(() => {
@@ -119,69 +225,71 @@ function App() {
   }, [activeModal]);
 
   return (
-    <div className="page">
-      <div className="page__content">
-        <Header
-          handleLoginModalOpen={handleLoginModalOpen}
-          handleMenuModalOpen={handleMenuModalOpen}
-          isLoggedIn={isLoggedIn}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                handleSearchBtn={handleSearchBtn}
-                newsItems={newsItems}
-                itemCount={itemCount}
-                setItemCount={setItemCount}
-                isVisible={isVisible}
-                isLoading={isLoading}
-                isNotFound={isNotFound}
-                isLoggedIn={isLoggedIn}
-                isError={isError}
-                isSaved={isSaved}
-                handleSaveBtn={handleSaveBtn}
-                handleShowMoreBtn={handleShowMoreBtn}
-              />
-            }
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="page__content">
+          <Header
+            handleLoginModalOpen={handleLoginModalOpen}
+            handleMenuModalOpen={handleMenuModalOpen}
+            isLoggedIn={isLoggedIn}
+            handleLogOut={handleLogOut}
           />
-          <Route
-            path="/saved-news"
-            element={
-              <SavedNews
-                newsItems={newsItems}
-                itemCount={itemCount}
-                isLoggedIn={isLoggedIn}
-                keyword={keyword}
-              />
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Footer />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  handleSearchBtn={handleSearchBtn}
+                  newsItems={newsItems}
+                  itemCount={itemCount}
+                  setItemCount={setItemCount}
+                  isVisible={isVisible}
+                  isLoading={isLoading}
+                  isNotFound={isNotFound}
+                  isLoggedIn={isLoggedIn}
+                  isError={isError}
+                  handleSaveBtn={handleSaveBtn}
+                  handleShowMoreBtn={handleShowMoreBtn}
+                />
+              }
+            />
+            <Route
+              path="/saved-news"
+              element={
+                <SavedNews
+                  savedNews={savedNews}
+                  isLoggedIn={isLoggedIn}
+                  handleDeleteBtn={handleDeleteBtn}
+                />
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Footer />
 
-        <LoginModal
-          isOpen={activeModal === "login"}
-          handleModalClose={handleModalClose}
-          handleModalToggle={handleModalToggle}
-        />
-        <RigisterModal
-          isOpen={activeModal === "rigister"}
-          handleModalClose={handleModalClose}
-          handleModalToggle={handleModalToggle}
-        />
-        <ConfirmationModal
-          isOpen={activeModal === "rigister-confirmed"}
-          handleModalToggle={handleModalToggle}
-        />
-        <MenuModal
-          isOpen={activeModal === "menu"}
-          handleModalClose={handleModalClose}
-          handleLoginModalOpen={handleLoginModalOpen}
-        />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            handleModalClose={handleModalClose}
+            handleModalToggle={handleModalToggle}
+            handleLogin={handleLogin}
+          />
+          <RigisterModal
+            isOpen={activeModal === "rigister"}
+            handleModalClose={handleModalClose}
+            handleModalToggle={handleModalToggle}
+          />
+          <ConfirmationModal
+            isOpen={activeModal === "rigister-confirmed"}
+            handleModalToggle={handleModalToggle}
+          />
+          <MenuModal
+            isOpen={activeModal === "menu"}
+            handleModalClose={handleModalClose}
+            handleLoginModalOpen={handleLoginModalOpen}
+          />
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

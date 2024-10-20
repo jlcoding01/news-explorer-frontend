@@ -2,16 +2,21 @@ import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SavedNews.css";
 
-function SavedNews({ newsItems, itemCount, isLoggedIn, keyword }) {
+function SavedNews({ isLoggedIn, handleDeleteBtn, savedNews }) {
+  const newsCount = savedNews.length;
+  const keywordList = Array.from(
+    new Set(savedNews.map((item) => item.keyword))
+  );
+
   return (
     <div className="sevednews">
-      <SavedNewsHeader />
+      <SavedNewsHeader newsCount={newsCount} keywordList={keywordList} />
       <div className="savednews__result">
         <NewsCardList
-          newsItems={newsItems}
-          itemCount={itemCount}
+          newsItems={savedNews}
+          itemCount={newsCount}
           isLoggedIn={isLoggedIn}
-          keyword={keyword}
+          handleDeleteBtn={handleDeleteBtn}
         />
       </div>
     </div>
