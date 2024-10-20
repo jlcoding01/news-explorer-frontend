@@ -12,7 +12,7 @@ let oneWeekBefore = new Date(today.setDate(today.getDate() - 7))
 
 export const newsApi = (keyword, apiKey) => {
   return request(
-    `https://newsapi.org/v2/everything?q=${keyword}&from=${oneWeekBefore}&to=${currentDate}&pageSize=30&apiKey=${apiKey}`,
+    `https://nomoreparties.co/news/v2/everything?q=${keyword}&from=${oneWeekBefore}&to=${currentDate}&pageSize=30&apiKey=${apiKey}`,
     {
       authorization: apiKey,
       "Content-type": "application/json",
