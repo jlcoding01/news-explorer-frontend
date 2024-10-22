@@ -17,9 +17,11 @@ function Footer() {
               Home
             </button>
           </Link>
-          <button className="footer__navibar_btn-org" type="button">
-            TripleTen
-          </button>
+          <a href="https://tripleten.com/home/web/" target="_blank">
+            <button className="footer__navibar_btn-org" type="button">
+              TripleTen
+            </button>
+          </a>
         </div>
         <div className="footer__navibar_icon">
           <a href="https://github.com/jlcoding01" target="_blank">
@@ -29,12 +31,13 @@ function Footer() {
               className="footer__navibar_icon-github"
             />
           </a>
-
-          <img
-            src={iconFacebook}
-            alt="facebook icon"
-            className="footer__navibar_icon-facebook"
-          />
+          <a href="https://www.facebook.com/" target="_blank">
+            <img
+              src={iconFacebook}
+              alt="facebook icon"
+              className="footer__navibar_icon-facebook"
+            />
+          </a>
         </div>
       </div>
     </div>
