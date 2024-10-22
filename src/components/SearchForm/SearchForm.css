@@ -1,0 +1,134 @@
+.search {
+  margin: -78px -7.22vw 0;
+  padding: 78px 7.22vw 0;
+  height: 498px;
+  background-image: url("../../assets/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
+}
+
+.search-form {
+  margin: 0 auto;
+  width: 608px;
+  max-width: 100%;
+  color: #fff;
+}
+
+.search-form__title {
+  margin: 80px 0 32px 0;
+  font-family: "Roboto Slab";
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 64px;
+}
+
+.seach-form__subtitle {
+  margin: 0 0 88px 0;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.search-form__container {
+  margin: 0 0 80px 0;
+  position: relative;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  width: 100%;
+}
+
+.search-form__input {
+  width: calc(100% - 28px);
+  height: 22px;
+  border-radius: 100px;
+  border: 1px solid #d1d2d6;
+  padding-left: 24px;
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+
+.search-form__btn {
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 168px;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #fff;
+  background: #2f71e5;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form__btn:hover {
+  background: #347eff;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    margin: -66px -40px 0;
+    padding: 66px 40px 0;
+    height: 344px;
+  }
+  .search-form {
+    width: 452px;
+  }
+
+  .search-form__title {
+    margin: 38px 0 16px 0;
+    font-size: 36px;
+    line-height: 40px;
+    width: 385px;
+  }
+
+  .seach-form__subtitle {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .search {
+    margin: -56px -16px 0;
+    padding: 56px 16px 0;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .search {
+    height: 480px;
+  }
+  .search-form__title {
+    margin: 30px 0 16px 0;
+    width: 285px;
+  }
+  .seach-form__subtitle {
+    margin-bottom: 122px;
+  }
+  .search-form__container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .search-form__input {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .search-form__btn {
+    position: unset;
+    width: 100%;
+    max-width: 100%;
+    height: 56px;
+  }
+}
