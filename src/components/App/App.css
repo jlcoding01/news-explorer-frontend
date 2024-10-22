@@ -1,6 +1,6 @@
 .page {
   background-color: #fff;
-  font-family: Roboto, "Roboto Slab", Inter;
+  font-family: Roboto, "Roboto Slab", Inter, Arial, Helvetica, sans-serif;
   color: #000;
   padding: 0 clamp(16px, 7.22vw, 106px);
   position: relative;

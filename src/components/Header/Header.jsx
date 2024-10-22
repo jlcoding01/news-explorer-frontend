@@ -13,11 +13,11 @@ function Header({
 }) {
   const location = useLocation();
   const headerClass =
-    location.pathname === "/saved-news" ? "header_saved-news" : "header_home";
+    location.pathname === "/saved-news" ? "header__saved-news" : "header__home";
   const headerMenuClass =
     location.pathname === "/saved-news"
-      ? "header_saved__btn-menu"
-      : "header_home__btn-menu";
+      ? "header__btn_menu_saved-news"
+      : "header__btn_menu_home";
 
   return (
     <header className={`header ${headerClass}`}>
@@ -25,8 +25,8 @@ function Header({
         <h1 className="header__logo">NewsExplorer</h1>
       </Link>
       <button
-        className={`header__btn-menu ${headerMenuClass} ${
-          isHidden && "btn-menu_hidden"
+        className={`header__btn_menu ${headerMenuClass} ${
+          isHidden && "header__btn_hidden"
         }`}
         type="button"
         onClick={handleMenuModalOpen}

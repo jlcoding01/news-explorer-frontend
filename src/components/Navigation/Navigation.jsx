@@ -5,12 +5,10 @@ import iconWhite from "../../assets/logout-white.svg";
 import iconBlack from "../../assets/logout-black.svg";
 import "./Navigation.css";
 
-
 function Navigation({
   isLoggedIn,
   handleLoginModalOpen,
   isOpen,
-
   handleLogOut,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -65,7 +63,7 @@ function Navigation({
         onClick={handleLogOut}
       >
         {currentUser.name}
-        <img src={iconLogout} className="icon-logout"></img>
+        <img src={iconLogout} className="navigation__btn_icon_logout"></img>
       </button>
     </div>
   );

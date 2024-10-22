@@ -286,6 +286,7 @@ function App() {
             isOpen={activeModal === "menu"}
             handleModalClose={handleModalClose}
             handleLoginModalOpen={handleLoginModalOpen}
+            isLoggedIn={isLoggedIn}
           />
         </div>
       </div>

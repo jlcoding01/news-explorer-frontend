@@ -1,4 +1,4 @@
-.modal__container_menu {
+.modal__container_type_menu {
   position: absolute;
   height: auto;
   left: 0;
@@ -8,22 +8,23 @@
   padding: 0;
   overflow: hidden;
 }
+
 .modal__menu {
   padding: 0px 16px 16px;
 }
 
-.menu__btn-close {
+.modal__btn-close_type_menu {
   top: 18px;
   right: 18px;
   z-index: 2;
 }
 
-.menu__btn-close_saved-news {
+.modal__btn_type_menu_saved-news {
   background: url(../../assets/btn-close-dark.svg) transparent;
 }
 
 @media screen and (max-width: 550px) {
-  .menu__btn-close {
+  .modal__btn-close_type_menu {
     right: 16px;
     width: 24px;
     height: 24px;

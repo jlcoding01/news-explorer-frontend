@@ -5,7 +5,12 @@ import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import "./MenuModal.css";
 
-function MenuModal({ isOpen, handleModalClose, handleLoginModalOpen }) {
+function MenuModal({
+  isOpen,
+  handleModalClose,
+  handleLoginModalOpen,
+  isLoggedIn,
+}) {
   const location = useLocation();
   useEffect(() => {
     if (isOpen) {
@@ -50,6 +55,7 @@ function MenuModal({ isOpen, handleModalClose, handleLoginModalOpen }) {
         <Navigation
           isOpen={isOpen}
           handleLoginModalOpen={handleLoginModalOpen}
+          isLoggedIn={isLoggedIn}
         />
       </div>
     </Modal>
