@@ -4,7 +4,7 @@
   justify-content: space-between;
   padding-top: 32px;
   padding-bottom: 26px;
-  padding-right: 7.22vw;
+  /* padding-right: 7.22vw; */
   font-family: Roboto;
   font-size: 18px;
   font-weight: 400;
@@ -23,6 +23,7 @@
   flex-direction: row;
   gap: 40px;
   /* align-items: center; */
+  margin-right: 50px;
 }
 
 .footer__navibar_btn {
@@ -71,6 +72,12 @@
 }
 
 @media screen and (max-width: 370px) {
+  .footer {
+    padding-top: 20px;
+  }
+  .footer__navibar {
+    margin-right: 10px;
+  }
   .footer__navibar_btn {
     flex-direction: column;
     align-items: flex-start;

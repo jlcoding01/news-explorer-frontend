@@ -65,4 +65,8 @@
   .header__btn_hidden {
     display: none;
   }
+
+  .header__logo {
+    font-size: 16px;
+  }
 }

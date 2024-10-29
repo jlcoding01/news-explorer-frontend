@@ -1,7 +1,8 @@
 .about {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
   gap: 56px;
   padding-top: 160px;
   padding-bottom: 80px;
@@ -10,7 +11,7 @@
 
 .about__avatar {
   max-width: 32vw;
-  min-width: 232px;
+  min-width: 272px;
   height: auto;
   width: 100%;
   aspect-ratio: 1/1;
@@ -22,7 +23,7 @@
   flex-direction: column;
   gap: 24px;
   max-width: 600px;
-  margin-top: -140px;
+  margin-top: 50px;
 }
 
 .about__description_title {
@@ -44,18 +45,33 @@
 @media screen and (max-width: 768px) {
   .about {
     padding-top: 120px;
+    padding-bottom: 40px;
+  }
+
+  .about__description {
+    margin-top: 0px;
   }
 
   .about__description_title {
     font-size: 30px;
     line-height: 40px;
   }
+
+  .about__avatar {
+    align-self: center;
+  }
 }
 
 @media screen and (max-width: 550px) {
   .about {
     padding-top: 112px;
+    padding-bottom: 128px;
     flex-direction: column;
     gap: 24px;
+  }
+
+  .about__avatar {
+    height: 272px;
+    width: 272px;
   }
 }

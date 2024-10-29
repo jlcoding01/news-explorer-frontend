@@ -77,8 +77,9 @@
   .search {
     margin: -66px -40px 0;
     padding: 66px 40px 0;
-    height: 344px;
+    height: 334px;
   }
+
   .search-form {
     width: 452px;
   }
@@ -94,6 +95,12 @@
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 48px;
+  }
+
+  .search-form__input {
+    padding-top: 17px;
+    padding-bottom: 17px;
+    border: 0px;
   }
 }
 
