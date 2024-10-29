@@ -38,7 +38,7 @@ function Navigation({
         style={{ color: "inherit", textDecoration: "none" }}
       >
         <button
-          className={`navigation__btn_hidden ${
+          className={`navigation__btn-profile_hidden ${
             isLoggedIn === true && "navigation__btn-profile"
           } ${profileBtnHighlight}`}
         >

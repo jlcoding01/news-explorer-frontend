@@ -15,14 +15,14 @@
 
 .header__btn_menu_home {
   background: url("../../assets/menu-home.svg") transparent center;
-  border: none;
-  height: 24px;
-  width: 24px;
-  cursor: pointer;
 }
 
 .header__btn_menu {
   display: none;
+  border: none;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
 }
 
 .header__btn_hidden {
@@ -31,10 +31,6 @@
 
 .header__btn_menu_saved-news {
   background: url("../../assets/menu-saved.svg") transparent center;
-  border: none;
-  height: 24px;
-  width: 24px;
-  cursor: pointer;
 }
 
 .header__home {
@@ -43,7 +39,7 @@
 
 .header__logo {
   margin: 0;
-  font-family: "Roboto Slab";
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;

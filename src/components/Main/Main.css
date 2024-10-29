@@ -13,7 +13,7 @@
 
 .search__result_title {
   margin: 0;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-size: 40px;
   font-weight: 400;
   line-height: 46px;
@@ -27,7 +27,7 @@
   border: none;
   border-radius: 100px;
   background: #fff;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
