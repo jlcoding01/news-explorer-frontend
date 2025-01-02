@@ -30,17 +30,18 @@ export const processData = (data) => {
       item.content !== "[Removed]" &&
       item.urlToImage !== null
     ) {
-      cardData.publishedAt = new Date(item.publishedAt).toLocaleDateString(
-        "en-US",
-        { year: "numeric", month: "long", day: "numeric" }
-      );
+      cardData.date = new Date(item.publishedAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
       cardData.id = Array.from({ length: 24 }, () =>
         Math.floor(Math.random() * 16).toString(16)
       ).join("");
       cardData.title = item.title;
-      cardData.description = item.description;
-      cardData.urlToImage = item.urlToImage;
-      cardData.name = item.source.name.toUpperCase();
+      cardData.text = item.description;
+      cardData.link = item.urlToImage;
+      cardData.source = item.source.name.toUpperCase();
       cardData.isSaved = false;
       cardData.keyword = "";
       result.push(cardData);

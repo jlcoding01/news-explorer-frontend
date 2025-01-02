@@ -30,21 +30,19 @@ function NewsCard({
   return (
     <>
       <li className="cardItem">
-        <img src={item.urlToImage} alt="news image" className="cardItem__img" />
+        <img src={item.link} alt="news image" className="cardItem__img" />
         <div className={cardLabelClassName}>{item.keyword}</div>
         <button
           className={`cardItem__btn ${!isHidden && "cardItem__btn-delete"}`}
           type="button"
-          onClick={() => {
-            handleDeleteBtn(id);
-          }}
+          onClick={handleDeleteBtn}
         ></button>
         <button
           className={`cardItem__btn ${isHidden && saveBtnClass}`}
           type="button"
           disabled={!isLoggedIn}
           onClick={() => {
-            handleSaveBtn(id);
+            handleSaveBtn(item);
           }}
         ></button>
         <div
@@ -53,10 +51,10 @@ function NewsCard({
           Sign in to save articles
         </div>
         <div className="cardItem__content">
-          <p className="cardItem__content_date">{item.publishedAt}</p>
+          <p className="cardItem__content_date">{item.date}</p>
           <p className="cardItem__content_headline">{item.title}</p>
-          <p className="cardItem__content_brief">{item.description}</p>
-          <p className="cardItem__content_src">{item.name}</p>
+          <p className="cardItem__content_brief">{item.text}</p>
+          <p className="cardItem__content_src">{item.source}</p>
         </div>
       </li>
     </>

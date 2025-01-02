@@ -9,14 +9,15 @@ import RigisterModal from "../RigisterModal/RigisterModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import MenuModal from "../MenuModal/MenuModal";
 import { apiKey } from "../../utils/constants";
-import { newsApi, processData } from "../../utils/NewsApi";
-import { getItems } from "../../utils/api.js";
+import { newsApi, processData } from "../../utils/newsApi";
+import { getItems, saveItems, deleteNewsItem } from "../../utils/api.js";
 import * as auth from "../../utils/auth.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import "./App.css";
 
 function App() {
   const token = "Strong_TOKEN";
+  // const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
 
   const [activeModal, setActiveModal] = useState("");
@@ -81,38 +82,55 @@ function App() {
   //   });
   // };
 
-  const handleSaveBtn = (id) => {
-    setNewsItems((items) => {
-      const updatedNewsItem = items.map((item) =>
-        item.id === id ? { ...item, isSaved: !item.isSaved } : item
-      );
+  // const handleSaveBtn = (id) => {
+  //   setNewsItems((items) => {
+  //     const updatedNewsItem = items.map((item) =>
+  //       item.id === id ? { ...item, isSaved: !item.isSaved } : item
+  //     );
 
-      const updatedItem = updatedNewsItem.find((item) => item.id === id);
+  //     const updatedItem = updatedNewsItem.find((item) => item.id === id);
 
-      setSavedNews((items) => {
-        if (updatedItem.isSaved) {
-          if (!items.some((item) => item.id === updatedItem.id)) {
-            return [...items, updatedItem];
-          }
-        } else {
-          return items.filter((item) => item.id !== id);
-        }
-        return items;
-      });
+  //     setSavedNews((items) => {
+  //       if (updatedItem.isSaved) {
+  //         if (!items.some((item) => item.id === updatedItem.id)) {
+  //           return [...items, updatedItem];
+  //         }
+  //       } else {
+  //         return items.filter((item) => item.id !== id);
+  //       }
+  //       return items;
+  //     });
 
-      return updatedNewsItem;
-    });
+  //     return updatedNewsItem;
+  //   });
+  // };
+
+  const handleSaveBtn = ({ keyword, title, text, date, source, link }) => {
+    return saveItems(keyword, title, text, date, source, link, token)
+      .then((data) => {
+        setSavedNews(data, ...SavedNews);
+      })
+      .catch(console.error);
   };
 
-  const handleDeleteBtn = (id) => {
-    setSavedNews((items) => {
-      return items.filter((item) => item.id !== id);
-    });
-    setNewsItems((items) => {
-      return items.map((item) =>
-        item.id === id ? { ...item, isSaved: !item.isSaved } : item
-      );
-    });
+  // const handleDeleteBtn = (id) => {
+  //   setSavedNews((items) => {
+  //     return items.filter((item) => item.id !== id);
+  //   });
+  //   setNewsItems((items) => {
+  //     return items.map((item) =>
+  //       item.id === id ? { ...item, isSaved: !item.isSaved } : item
+  //     );
+  //   });
+  // };
+
+  const handleDeleteBtn = () => {
+    deleteNewsItem(cardData._id, token)
+      .then(() => {
+        const result = savedNews.filter((item) => item._id !== cardData._id);
+        setSavedNews(result);
+      })
+      .catch(console.error);
   };
 
   const handleShowMoreBtn = () => {
