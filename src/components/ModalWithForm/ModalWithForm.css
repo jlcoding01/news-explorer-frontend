@@ -118,6 +118,25 @@
   cursor: pointer;
 }
 
+.form__element {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  border: none;
+}
+
+.form__element_label {
+  color: #2f71e5;
+}
+
+.form__element_input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+
+  line-height: 17px;
+}
+
 @media screen and (max-width: 450px) {
   .modal__form_btn-submit {
     width: 288px;

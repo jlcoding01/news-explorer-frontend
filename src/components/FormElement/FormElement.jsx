@@ -45,7 +45,7 @@ function FormElement({
           {name}
         </label>
         <input
-          type="text"
+          type={type}
           className="form__element_input"
           placeholder={`Enter ${nameLowerCase}`}
           name={nameLowerCase}

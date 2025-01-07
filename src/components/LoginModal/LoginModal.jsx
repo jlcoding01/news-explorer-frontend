@@ -9,27 +9,27 @@ function LoginModal({
   handleModalToggle,
   handleLogin,
 }) {
-  const { values, setValues, handleValueChange } = useForm({});
-  const [isEmailValid, setIsEmailValid] = useState(false);
+  const { values, handleValueChange, errors, isValid, resetForm } = useForm({});
+  // const [isEmailValid, setIsEmailValid] = useState(false);
 
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  // const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const handleEmailValidity = (isValid) => {
-    setIsEmailValid(isValid);
-  };
+  // const handleEmailValidity = (isValid) => {
+  //   setIsEmailValid(isValid);
+  // };
 
-  const handlePasswordValidity = (isValid) => {
-    setIsPasswordValid(isValid);
-  };
+  // const handlePasswordValidity = (isValid) => {
+  //   setIsPasswordValid(isValid);
+  // };
 
-  const isFormValid = isEmailValid && isPasswordValid;
+  // const isFormValid = isEmailValid && isPasswordValid;
 
-  const handleReset = () => {
-    setValues({});
-  };
+  // const handleReset = () => {
+  //   setValues({});
+  // };
 
   useEffect(() => {
-    handleReset();
+    resetForm();
   }, [isOpen]);
 
   const handleSubmit = (e) => {
@@ -45,25 +45,57 @@ function LoginModal({
       isOpen={isOpen}
       handleModalClose={handleModalClose}
       handleModalToggle={handleModalToggle}
-      isBtnDisabled={!isFormValid}
+      isBtnDisabled={!isValid}
       onSubmit={handleSubmit}
     >
-      <FormElement
-        name="Email"
-        type="signin"
+      {/* <FormElement
+        name="email"
+        type="email"
         isOpen={isOpen}
         onFormValidity={handleEmailValidity}
         values={values}
         handleValueChange={handleValueChange}
       ></FormElement>
       <FormElement
-        name="Password"
-        type="signin"
+        name="password"
+        type="text"
         isOpen={isOpen}
         onFormValidity={handlePasswordValidity}
         values={values}
         handleValueChange={handleValueChange}
-      ></FormElement>
+      ></FormElement> */}
+      <>
+        <div className="form__element">
+          <label htmlFor="email-login" className="form__element_label">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form__element_input"
+            placeholder="Enter email"
+            name="email"
+            id="email-login"
+            value={values["email"] || ""}
+            onChange={handleValueChange}
+            required
+          />
+        </div>
+        <div className="form__element">
+          <label htmlFor="password-login" className="form__element_label">
+            Password
+          </label>
+          <input
+            type="text"
+            className="form__element_input"
+            placeholder="Enter password"
+            name="password"
+            id="password-login"
+            value={values["password"] || ""}
+            onChange={handleValueChange}
+            required
+          />
+        </div>
+      </>
     </ModalWithForm>
   );
 }
