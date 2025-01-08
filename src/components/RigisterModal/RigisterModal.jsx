@@ -1,44 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
-
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import FormElement from "../FormElement/FormElement";
 
 function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
   const { values, handleValueChange, errors, isValid, resetForm } = useForm({});
-
-  // const [isEmailValid, setIsEmailValid] = useState(false);
-
-  // const [isPasswordValid, setIsPasswordValid] = useState(false);
-
-  // const [isUernameValid, setIsUsernameValid] = useState(false);
-
-  // const handleEmailValidity = (isValid) => {
-  //   setIsEmailValid(isValid);
-  // };
-
-  // const handlePasswordValidity = (isValid) => {
-  //   setIsPasswordValid(isValid);
-  // };
-
-  // const handleUserNameValidity = (isValid) => {
-  //   setIsUsernameValid(isValid);
-  // };
-  // const isFormValid = isEmailValid && isPasswordValid && isUernameValid;
-
-  // const [isFormValid, setIsFormValid] = useState(false);
-
-  // useEffect(() => {
-  //   if (values.email && values.username && values.password) {
-  //     setIsFormValid(true);
-  //   } else {
-  //     setIsFormValid(false);
-  //   }
-  // }, [values]);
-
-  // const handleReset = () => {
-  //   setValues({});
-  // };
 
   useEffect(() => {
     resetForm();
@@ -54,28 +19,6 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
       handleModalToggle={handleModalToggle}
       isBtnDisabled={!isValid}
     >
-      {/* <FormElement
-        name="email"
-        type="email"
-        onFormValidity={handleEmailValidity}
-        values={values}
-        handleValueChange={handleValueChange}
-      ></FormElement>
-      <FormElement
-        name="password"
-        type="text"
-        onFormValidity={handlePasswordValidity}
-        values={values}
-        handleValueChange={handleValueChange}
-      ></FormElement>
-      <FormElement
-        name="username"
-        type="text"
-        onFormValidity={handleUserNameValidity}
-        values={values}
-        handleValueChange={handleValueChange}
-      ></FormElement> */}
-
       <>
         <div className="form__element">
           <label htmlFor="email-register" className="form__element_label">
@@ -91,6 +34,9 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
             onChange={handleValueChange}
             required
           />
+          <span className="form__element_error-msg">
+            {errors["email"] || ""}
+          </span>
         </div>
         <div className="form__element">
           <label htmlFor="password-register" className="form__element_label">
@@ -106,6 +52,9 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
             onChange={handleValueChange}
             required
           />
+          <span className="form__element_error-msg">
+            {errors["password"] || ""}
+          </span>
         </div>
         <div className="form__element">
           <label htmlFor="username-register" className="form__element_label">
@@ -121,6 +70,9 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
             onChange={handleValueChange}
             required
           />
+          <span className="form__element_error-msg">
+            {errors["username"] || ""}
+          </span>
         </div>
       </>
     </ModalWithForm>

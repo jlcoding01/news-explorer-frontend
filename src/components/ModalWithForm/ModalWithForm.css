@@ -137,6 +137,11 @@
   line-height: 17px;
 }
 
+.form__element_error-msg {
+  margin: 0;
+  padding: 0;
+  color: red;
+}
 @media screen and (max-width: 450px) {
   .modal__form_btn-submit {
     width: 288px;

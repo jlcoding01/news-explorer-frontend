@@ -10,6 +10,7 @@ export function useForm() {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: validationMessage });
     setIsValid(e.target.closest("form").checkValidity());
+    console.log(errors);
   };
 
   const resetForm = useCallback(() => {

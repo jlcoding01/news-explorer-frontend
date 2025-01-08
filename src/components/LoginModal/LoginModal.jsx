@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import FormElement from "../FormElement/FormElement";
 
 function LoginModal({
   isOpen,
@@ -10,23 +9,6 @@ function LoginModal({
   handleLogin,
 }) {
   const { values, handleValueChange, errors, isValid, resetForm } = useForm({});
-  // const [isEmailValid, setIsEmailValid] = useState(false);
-
-  // const [isPasswordValid, setIsPasswordValid] = useState(false);
-
-  // const handleEmailValidity = (isValid) => {
-  //   setIsEmailValid(isValid);
-  // };
-
-  // const handlePasswordValidity = (isValid) => {
-  //   setIsPasswordValid(isValid);
-  // };
-
-  // const isFormValid = isEmailValid && isPasswordValid;
-
-  // const handleReset = () => {
-  //   setValues({});
-  // };
 
   useEffect(() => {
     resetForm();
@@ -48,22 +30,6 @@ function LoginModal({
       isBtnDisabled={!isValid}
       onSubmit={handleSubmit}
     >
-      {/* <FormElement
-        name="email"
-        type="email"
-        isOpen={isOpen}
-        onFormValidity={handleEmailValidity}
-        values={values}
-        handleValueChange={handleValueChange}
-      ></FormElement>
-      <FormElement
-        name="password"
-        type="text"
-        isOpen={isOpen}
-        onFormValidity={handlePasswordValidity}
-        values={values}
-        handleValueChange={handleValueChange}
-      ></FormElement> */}
       <>
         <div className="form__element">
           <label htmlFor="email-login" className="form__element_label">
@@ -79,6 +45,9 @@ function LoginModal({
             onChange={handleValueChange}
             required
           />
+          <span className="form__element_error-msg">
+            {errors["email"] || ""}
+          </span>
         </div>
         <div className="form__element">
           <label htmlFor="password-login" className="form__element_label">
@@ -94,6 +63,9 @@ function LoginModal({
             onChange={handleValueChange}
             required
           />
+          <span className="form__element_error-msg">
+            {errors["password"] || ""}
+          </span>
         </div>
       </>
     </ModalWithForm>
