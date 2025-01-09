@@ -16,8 +16,8 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import "./App.css";
 
 function App() {
-  const token = "Strong_TOKEN";
-  // const token = localStorage.getItem("jwt");
+  // const token = "Strong_TOKEN";
+  const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
 
   const [activeModal, setActiveModal] = useState("");
@@ -33,8 +33,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
-    password: "",
-    id: "",
+    _id: "",
   });
 
   // console.log(currentUser);
@@ -105,11 +104,21 @@ function App() {
   //   });
   // };
 
-  const handleSaveBtn = ({ keyword, title, text, date, source, link }) => {
-    return saveItems(keyword, title, text, date, source, link, token)
+  const handleSaveBtn = ({
+    keyword,
+    title,
+    text,
+    date,
+    source,
+    image,
+    link,
+  }) => {
+    return saveItems(keyword, title, text, date, source, image, link, token)
       .then((data) => {
-        setSavedNews(data, ...SavedNews);
+        setSavedNews([data, ...savedNews]);
+        console.log(savedNews);
       })
+
       .catch(console.error);
   };
 
@@ -137,6 +146,21 @@ function App() {
     setItemCount((prev) => prev + 3);
   };
 
+  const handleRegister = ({ email, password, name }) => {
+    if (!email || !password || !name) {
+      return;
+    }
+
+    return auth
+      .register(email, password, name)
+      .then(() => {
+        handleModalClose();
+        handleConfirmModalOpen();
+        setCurrentUser({ email, name });
+      })
+      .catch(console.error);
+  };
+
   const handleLogin = ({ email, password }) => {
     if (!email || !password) {
       return;
@@ -147,13 +171,10 @@ function App() {
       .then((res) => {
         console.log(res);
         handleModalClose();
-        navigate("/");
+        // navigate("/");
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setCurrentUser({
-            name: "Jerry",
-            email: "fake@example.com",
-          });
+          setCurrentUser(res.user);
           setIsLoggedIn(true);
         }
       })
@@ -171,16 +192,18 @@ function App() {
     if (!token) return;
 
     auth
-      .checkToken(token)
-      .then((res) => {
-        setCurrentUser(res.data);
+      .getCurrentUser(token)
+      .then(({ name, email, _id }) => {
+        setCurrentUser({ name, email, _id });
         setIsLoggedIn(true);
       })
       .catch(console.error);
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    getItems()
+    if (!token) return;
+
+    getItems(token)
       .then((data) => {
         setSavedNews(data);
       })
@@ -295,6 +318,7 @@ function App() {
             isOpen={activeModal === "rigister"}
             handleModalClose={handleModalClose}
             handleModalToggle={handleModalToggle}
+            handleRegister={handleRegister}
           />
           <ConfirmationModal
             isOpen={activeModal === "rigister-confirmed"}

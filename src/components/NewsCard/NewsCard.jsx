@@ -10,7 +10,7 @@ function NewsCard({
 }) {
   const location = useLocation();
   // const id = item.id;
-  const { isSaved, id } = item;
+  const { isSaved, _id } = item;
 
   const cardBtnClassName =
     location.pathname === "/saved-news"
@@ -30,7 +30,7 @@ function NewsCard({
   return (
     <>
       <li className="cardItem">
-        <img src={item.link} alt="news image" className="cardItem__img" />
+        <img src={item.image} alt="news image" className="cardItem__img" />
         <div className={cardLabelClassName}>{item.keyword}</div>
         <button
           className={`cardItem__btn ${!isHidden && "cardItem__btn-delete"}`}

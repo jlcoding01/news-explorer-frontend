@@ -62,7 +62,7 @@ function Navigation({
         type="button"
         onClick={handleLogOut}
       >
-        {currentUser.name}
+        {currentUser["name"]}
         <img src={iconLogout} className="navigation__btn_icon_logout"></img>
       </button>
     </div>

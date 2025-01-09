@@ -30,6 +30,7 @@ export const processData = (data) => {
       item.content !== "[Removed]" &&
       item.urlToImage !== null
     ) {
+      console.log(item);
       cardData.date = new Date(item.publishedAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -40,8 +41,9 @@ export const processData = (data) => {
       ).join("");
       cardData.title = item.title;
       cardData.text = item.description;
-      cardData.link = item.urlToImage;
+      cardData.image = item.urlToImage;
       cardData.source = item.source.name.toUpperCase();
+      cardData.link = item.url;
       cardData.isSaved = false;
       cardData.keyword = "";
       result.push(cardData);

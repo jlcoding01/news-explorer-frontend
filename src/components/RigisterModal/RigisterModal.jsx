@@ -2,8 +2,18 @@ import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
+function RigisterModal({
+  isOpen,
+  handleModalClose,
+  handleModalToggle,
+  handleRegister,
+}) {
   const { values, handleValueChange, errors, isValid, resetForm } = useForm({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegister(values);
+  };
 
   useEffect(() => {
     resetForm();
@@ -18,6 +28,7 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
       handleModalClose={handleModalClose}
       handleModalToggle={handleModalToggle}
       isBtnDisabled={!isValid}
+      onSubmit={handleSubmit}
     >
       <>
         <div className="form__element">
@@ -64,14 +75,14 @@ function RigisterModal({ isOpen, handleModalClose, handleModalToggle }) {
             type="text"
             className="form__element_input"
             placeholder="Enter your username"
-            name="username"
+            name="name"
             id="username-register"
-            value={values["username"] || ""}
+            value={values["name"] || ""}
             onChange={handleValueChange}
             required
           />
           <span className="form__element_error-msg">
-            {errors["username"] || ""}
+            {errors["name"] || ""}
           </span>
         </div>
       </>

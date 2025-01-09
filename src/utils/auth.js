@@ -1,18 +1,38 @@
-export const authorize = (email, password) => {
-  return new Promise((resolve, reject) => {
-    resolve({ token: "Strong_TOKEN" });
+import { request } from "./api";
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.newsexplorerapp.jumpingcrab.com"
+    : "http://localhost:3001";
+
+export const register = (email, password, name) => {
+  return request(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, name }),
   });
 };
 
-export const checkToken = (token) => {
-  return new Promise((resolve, reject) => {
-    resolve({
-      data: {
-        name: "Jerry",
-        email: "fake@example.com",
-        password: "temp1234",
-        id: "id1234",
-      },
-    });
+export const authorize = (email, password) => {
+  return request(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+};
+
+export const getCurrentUser = (token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 };

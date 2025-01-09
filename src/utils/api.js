@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "api.newsexplorerapp.jumpingcrab.com"
+    ? "https://api.newsexplorerapp.jumpingcrab.com"
     : "http://localhost:3001";
 
 function checkResponse(res) {
@@ -11,11 +11,12 @@ export function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-export const getItems = () => {
+export const getItems = (token) => {
   return request(`${baseUrl}/articles`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   });
 };
@@ -98,7 +99,16 @@ export const getItems = () => {
 //   });
 // }
 
-export const saveItems = (keyword, title, text, date, source, link, token) => {
+export const saveItems = (
+  keyword,
+  title,
+  text,
+  date,
+  source,
+  image,
+  link,
+  token
+) => {
   return request(`${baseUrl}/articles`, {
     method: "POST",
     headers: {
@@ -111,6 +121,7 @@ export const saveItems = (keyword, title, text, date, source, link, token) => {
       text,
       date,
       source,
+      image,
       link,
     }),
   });
