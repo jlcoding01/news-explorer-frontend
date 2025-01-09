@@ -15,7 +15,6 @@ function Main({
   isNotFound,
   isLoggedIn,
   isError,
-  isSaved,
   handleSaveBtn,
   handleShowMoreBtn,
 }) {
@@ -51,7 +50,6 @@ function Main({
           newsItems={newsItems}
           itemCount={itemCount}
           isLoggedIn={isLoggedIn}
-          isSaved={isSaved}
           handleSaveBtn={handleSaveBtn}
         />
         <button

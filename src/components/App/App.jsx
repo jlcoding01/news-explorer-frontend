@@ -30,6 +30,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [itemCount, setItemCount] = useState(3);
+  // const [isSaved, setIsSaved] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
@@ -115,32 +116,32 @@ function App() {
   }) => {
     return saveItems(keyword, title, text, date, source, image, link, token)
       .then((data) => {
+        console.log(data);
         setSavedNews([data, ...savedNews]);
+
         console.log(savedNews);
       })
 
       .catch(console.error);
   };
 
-  // const handleDeleteBtn = (id) => {
-  //   setSavedNews((items) => {
-  //     return items.filter((item) => item.id !== id);
-  //   });
-  //   setNewsItems((items) => {
-  //     return items.map((item) =>
-  //       item.id === id ? { ...item, isSaved: !item.isSaved } : item
-  //     );
-  //   });
-  // };
-
-  const handleDeleteBtn = () => {
-    deleteNewsItem(cardData._id, token)
+  const handleDeleteBtn = (articleId) => {
+    deleteNewsItem(articleId, token)
       .then(() => {
-        const result = savedNews.filter((item) => item._id !== cardData._id);
+        const result = savedNews.filter((item) => item._id !== articleId);
         setSavedNews(result);
       })
       .catch(console.error);
   };
+
+  // const toggleSave = (item) => {
+  //   if (isSaved) {
+  //     handleDeleteBtn(item._id);
+  //   } else {
+  //     handleSaveBtn(item);
+  //   }
+  //   setIsSaved(!isSaved);
+  // };
 
   const handleShowMoreBtn = () => {
     setItemCount((prev) => prev + 3);

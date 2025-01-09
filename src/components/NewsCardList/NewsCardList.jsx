@@ -13,10 +13,9 @@ function NewsCardList({
     <ul className="card__container">
       {newsItems.slice(0, itemCount).map((item) => (
         <NewsCard
-          key={item.id}
+          key={item._id}
           item={item}
           isLoggedIn={isLoggedIn}
-          isSaved={isSaved}
           handleSaveBtn={handleSaveBtn}
           handleDeleteBtn={handleDeleteBtn}
         />

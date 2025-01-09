@@ -36,9 +36,9 @@ export const processData = (data) => {
         month: "long",
         day: "numeric",
       });
-      cardData.id = Array.from({ length: 24 }, () =>
-        Math.floor(Math.random() * 16).toString(16)
-      ).join("");
+      // cardData.id = Array.from({ length: 24 }, () =>
+      //   Math.floor(Math.random() * 16).toString(16)
+      // ).join("");
       cardData.title = item.title;
       cardData.text = item.description;
       cardData.image = item.urlToImage;
