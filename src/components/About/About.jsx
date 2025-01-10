@@ -18,10 +18,6 @@ function About() {
           open-sourced. Free feel to move to the GitHub Page👇for more
           information.
         </p>
-        {/* <p className="about__description_content">
-          You can also talk about your experience with TripleTen, what you
-          learned there, and how you can help potential customers.
-        </p> */}
       </div>
     </div>
   );

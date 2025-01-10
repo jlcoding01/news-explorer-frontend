@@ -21,7 +21,7 @@ function Navigation({
     location.pathname === "/" && "navigation__btn-home_highlight";
   const profileBtnHighlight =
     location.pathname === "/saved-news" && "navigation__btn-profile_highlight";
-  // console.log(currentUser);
+
   return (
     <div className={`navigation ${isOpen && "navigation__menu"}`}>
       <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>

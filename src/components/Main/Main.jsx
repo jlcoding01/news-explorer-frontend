@@ -18,12 +18,7 @@ function Main({
   handleSaveBtn,
   handleShowMoreBtn,
 }) {
-  // const [itemCount, setItemCount] = useState(3);
   const [isHidden, setIsHidden] = useState(false);
-
-  // const handleShowMoreBtn = () => {
-  //   setItemCount((prev) => prev + 3);
-  // };
 
   useEffect(() => {
     if (itemCount > newsItems.length && itemCount !== 3) {

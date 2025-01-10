@@ -13,10 +13,11 @@ import { newsApi, processData } from "../../utils/newsApi";
 import { getItems, saveItems, deleteNewsItem } from "../../utils/api.js";
 import * as auth from "../../utils/auth.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import SavedNewsContext from "../../contexts/SavedNewsContext.js";
+import ProtectedRoute from "../ProtectedRoute.jsx";
 import "./App.css";
 
 function App() {
-  // const token = "Strong_TOKEN";
   const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
 
@@ -30,14 +31,11 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [itemCount, setItemCount] = useState(3);
-  // const [isSaved, setIsSaved] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
     _id: "",
   });
-
-  // console.log(currentUser);
 
   const handleModalClose = () => {
     setActiveModal("");
@@ -74,37 +72,6 @@ function App() {
     setIsError(false);
   };
 
-  // const handleSaveBtn = (id) => {
-  //   setNewsItems((items) => {
-  //     return items.map((item) =>
-  //       item.id === id ? { ...item, isSaved: !item.isSaved } : item
-  //     );
-  //   });
-  // };
-
-  // const handleSaveBtn = (id) => {
-  //   setNewsItems((items) => {
-  //     const updatedNewsItem = items.map((item) =>
-  //       item.id === id ? { ...item, isSaved: !item.isSaved } : item
-  //     );
-
-  //     const updatedItem = updatedNewsItem.find((item) => item.id === id);
-
-  //     setSavedNews((items) => {
-  //       if (updatedItem.isSaved) {
-  //         if (!items.some((item) => item.id === updatedItem.id)) {
-  //           return [...items, updatedItem];
-  //         }
-  //       } else {
-  //         return items.filter((item) => item.id !== id);
-  //       }
-  //       return items;
-  //     });
-
-  //     return updatedNewsItem;
-  //   });
-  // };
-
   const handleSaveBtn = ({
     keyword,
     title,
@@ -114,15 +81,15 @@ function App() {
     image,
     link,
   }) => {
-    return saveItems(keyword, title, text, date, source, image, link, token)
-      .then((data) => {
-        console.log(data);
-        setSavedNews([data, ...savedNews]);
-
-        console.log(savedNews);
-      })
-
-      .catch(console.error);
+    if (savedNews.some((news) => news.link === link)) {
+      setSavedNews((prev) => prev.filter((news) => news.link !== link));
+    } else {
+      saveItems(keyword, title, text, date, source, image, link, token)
+        .then((data) => {
+          setSavedNews([data, ...savedNews]);
+        })
+        .catch(console.error);
+    }
   };
 
   const handleDeleteBtn = (articleId) => {
@@ -133,15 +100,6 @@ function App() {
       })
       .catch(console.error);
   };
-
-  // const toggleSave = (item) => {
-  //   if (isSaved) {
-  //     handleDeleteBtn(item._id);
-  //   } else {
-  //     handleSaveBtn(item);
-  //   }
-  //   setIsSaved(!isSaved);
-  // };
 
   const handleShowMoreBtn = () => {
     setItemCount((prev) => prev + 3);
@@ -170,13 +128,12 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        console.log(res);
-        handleModalClose();
-        // navigate("/");
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setCurrentUser(res.user);
+          setCurrentUser(res);
           setIsLoggedIn(true);
+          handleModalClose();
+          navigate("/");
         }
       })
       .catch(console.error);
@@ -226,7 +183,6 @@ function App() {
             }));
             setNewsItems(processedData);
             setIsVisible(true);
-            console.log(processedData);
           }
         })
         .catch(() => {
@@ -268,71 +224,75 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <div className="page__content">
-          <Header
-            handleLoginModalOpen={handleLoginModalOpen}
-            handleMenuModalOpen={handleMenuModalOpen}
-            isLoggedIn={isLoggedIn}
-            handleLogOut={handleLogOut}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  handleSearchBtn={handleSearchBtn}
-                  newsItems={newsItems}
-                  itemCount={itemCount}
-                  setItemCount={setItemCount}
-                  isVisible={isVisible}
-                  isLoading={isLoading}
-                  isNotFound={isNotFound}
-                  isLoggedIn={isLoggedIn}
-                  isError={isError}
-                  handleSaveBtn={handleSaveBtn}
-                  handleShowMoreBtn={handleShowMoreBtn}
-                />
-              }
+      <SavedNewsContext.Provider value={savedNews}>
+        <div className="page">
+          <div className="page__content">
+            <Header
+              handleLoginModalOpen={handleLoginModalOpen}
+              handleMenuModalOpen={handleMenuModalOpen}
+              isLoggedIn={isLoggedIn}
+              handleLogOut={handleLogOut}
             />
-            <Route
-              path="/saved-news"
-              element={
-                <SavedNews
-                  savedNews={savedNews}
-                  isLoggedIn={isLoggedIn}
-                  handleDeleteBtn={handleDeleteBtn}
-                />
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-          <Footer />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    handleSearchBtn={handleSearchBtn}
+                    newsItems={newsItems}
+                    itemCount={itemCount}
+                    setItemCount={setItemCount}
+                    isVisible={isVisible}
+                    isLoading={isLoading}
+                    isNotFound={isNotFound}
+                    isLoggedIn={isLoggedIn}
+                    isError={isError}
+                    handleSaveBtn={handleSaveBtn}
+                    handleShowMoreBtn={handleShowMoreBtn}
+                  />
+                }
+              />
+              <Route
+                path="/saved-news"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <SavedNews
+                      savedNews={savedNews}
+                      isLoggedIn={isLoggedIn}
+                      handleDeleteBtn={handleDeleteBtn}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+            <Footer />
 
-          <LoginModal
-            isOpen={activeModal === "login"}
-            handleModalClose={handleModalClose}
-            handleModalToggle={handleModalToggle}
-            handleLogin={handleLogin}
-          />
-          <RigisterModal
-            isOpen={activeModal === "rigister"}
-            handleModalClose={handleModalClose}
-            handleModalToggle={handleModalToggle}
-            handleRegister={handleRegister}
-          />
-          <ConfirmationModal
-            isOpen={activeModal === "rigister-confirmed"}
-            handleModalToggle={handleModalToggle}
-          />
-          <MenuModal
-            isOpen={activeModal === "menu"}
-            handleModalClose={handleModalClose}
-            handleLoginModalOpen={handleLoginModalOpen}
-            isLoggedIn={isLoggedIn}
-          />
+            <LoginModal
+              isOpen={activeModal === "login"}
+              handleModalClose={handleModalClose}
+              handleModalToggle={handleModalToggle}
+              handleLogin={handleLogin}
+            />
+            <RigisterModal
+              isOpen={activeModal === "rigister"}
+              handleModalClose={handleModalClose}
+              handleModalToggle={handleModalToggle}
+              handleRegister={handleRegister}
+            />
+            <ConfirmationModal
+              isOpen={activeModal === "rigister-confirmed"}
+              handleModalToggle={handleModalToggle}
+            />
+            <MenuModal
+              isOpen={activeModal === "menu"}
+              handleModalClose={handleModalClose}
+              handleLoginModalOpen={handleLoginModalOpen}
+              isLoggedIn={isLoggedIn}
+            />
+          </div>
         </div>
-      </div>
+      </SavedNewsContext.Provider>
     </CurrentUserContext.Provider>
   );
 }

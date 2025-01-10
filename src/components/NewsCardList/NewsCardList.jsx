@@ -5,15 +5,14 @@ function NewsCardList({
   newsItems,
   itemCount,
   isLoggedIn,
-  isSaved,
   handleSaveBtn,
   handleDeleteBtn,
 }) {
   return (
     <ul className="card__container">
-      {newsItems.slice(0, itemCount).map((item) => (
+      {newsItems.slice(0, itemCount).map((item, index) => (
         <NewsCard
-          key={item._id}
+          key={item._id || `temp-${index}`}
           item={item}
           isLoggedIn={isLoggedIn}
           handleSaveBtn={handleSaveBtn}

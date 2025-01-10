@@ -6,10 +6,6 @@ let oneWeekBefore = new Date(today.setDate(today.getDate() - 7))
   .toJSON()
   .slice(0, 10);
 
-// const itemID = Array.from({ length: 24 }, () =>
-//   Math.floor(Math.random() * 16).toString(16)
-// ).join("");
-
 export const newsApi = (keyword, apiKey) => {
   return request(
     `https://nomoreparties.co/news/v2/everything?q=${keyword}&from=${oneWeekBefore}&to=${currentDate}&pageSize=30&apiKey=${apiKey}`,
@@ -30,15 +26,11 @@ export const processData = (data) => {
       item.content !== "[Removed]" &&
       item.urlToImage !== null
     ) {
-      console.log(item);
       cardData.date = new Date(item.publishedAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
       });
-      // cardData.id = Array.from({ length: 24 }, () =>
-      //   Math.floor(Math.random() * 16).toString(16)
-      // ).join("");
       cardData.title = item.title;
       cardData.text = item.description;
       cardData.image = item.urlToImage;

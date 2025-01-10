@@ -1,30 +1,13 @@
-import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import React from "react";
+import SavedNewsContext from "../../contexts/SavedNewsContext";
 import "./NewsCard.css";
 
 function NewsCard({ item, isLoggedIn, handleSaveBtn, handleDeleteBtn }) {
   const location = useLocation();
+  const savedNews = React.useContext(SavedNewsContext);
 
-  // const { isSaved, _id } = item;
-  const [isSaved, setIsSaved] = useState(false);
-
-  const toggleSave = () => {
-    if (isSaved) {
-      handleDeleteBtn(item._id);
-    } else {
-      handleSaveBtn(item);
-    }
-    setIsSaved(!isSaved);
-  };
-
-  useEffect(() => {
-    setIsSaved(item.isSaved || false);
-  }, [item]);
-
-  const cardBtnClassName =
-    location.pathname === "/saved-news"
-      ? "cardItem__btn-delete"
-      : "cardItem__btn-save";
+  const isSaved = savedNews.some((news) => news.link === item.link);
 
   const isHidden = location.pathname === "/saved-news" ? false : true;
   const saveBtnClass = isSaved
@@ -52,7 +35,9 @@ function NewsCard({ item, isLoggedIn, handleSaveBtn, handleDeleteBtn }) {
           className={`cardItem__btn ${isHidden && saveBtnClass}`}
           type="button"
           disabled={!isLoggedIn}
-          onClick={toggleSave}
+          onClick={() => {
+            handleSaveBtn(item);
+          }}
         ></button>
         <div
           className={`cardItem__msg ${isLoggedIn && "cardItem__msg_hidden"}`}
