@@ -1,5 +1,5 @@
 const baseUrl =
-  process.env.NODE_ENV === "production"
+  import.meta.env.NODE_ENV === "production"
     ? "https://api.newsexplorerapp.jumpingcrab.com"
     : "http://localhost:3001";
 
