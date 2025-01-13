@@ -176,7 +176,7 @@ function App() {
         setSavedNews(data);
       })
       .catch(console.error);
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     if (keyword.trim() !== "" && keyword !== undefined) {
