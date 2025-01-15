@@ -154,6 +154,7 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser({});
     navigate("/");
+    setIsVisible(false);
   };
 
   useEffect(() => {
