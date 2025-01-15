@@ -1,9 +1,4 @@
-import { request } from "./api";
-
-const baseUrl =
-  import.meta.env.NODE_ENV === "production"
-    ? "https://api.newsexplorerapp.jumpingcrab.com"
-    : "http://localhost:3001";
+import { baseUrl, request } from "./api";
 
 export const register = (email, password, name) => {
   return request(`${baseUrl}/signup`, {
