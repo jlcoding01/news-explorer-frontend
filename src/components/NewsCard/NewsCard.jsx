@@ -34,7 +34,6 @@ function NewsCard({ item, isLoggedIn, handleSaveBtn, handleDeleteBtn }) {
         <button
           className={`cardItem__btn ${isHidden && saveBtnClass}`}
           type="button"
-          disabled={!isLoggedIn}
           onClick={() => {
             handleSaveBtn(item);
           }}

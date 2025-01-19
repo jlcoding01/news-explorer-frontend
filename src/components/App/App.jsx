@@ -81,20 +81,15 @@ function App() {
     image,
     link,
   }) => {
+    if (!token) {
+      handleRigisterModalOpen();
+      return;
+    }
+
     if (savedNews.some((news) => news.link === link)) {
       setSavedNews((prev) => prev.filter((news) => news.link !== link));
     } else {
-      saveItems(
-        keyword,
-        title,
-        text,
-        date,
-        source,
-        image,
-        link,
-
-        token
-      )
+      saveItems(keyword, title, text, date, source, image, link)
         .then((data) => {
           setSavedNews([data, ...savedNews]);
         })
