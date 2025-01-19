@@ -6,7 +6,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="footer__copyright">
         &copy; 2024 Supersite, Powered by News API
       </div>
@@ -40,7 +40,7 @@ function Footer() {
           </a>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 

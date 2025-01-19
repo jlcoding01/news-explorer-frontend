@@ -6,8 +6,7 @@ function SearchForm({ handleSearchBtn, setItemCount }) {
   const { values, setValues, handleValueChange } = useForm({});
   const [isValid, setIsValid] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSearch = () => {
     if (isValid) {
       handleSearchBtn(values["search"]);
       setValues({});
@@ -42,8 +41,8 @@ function SearchForm({ handleSearchBtn, setItemCount }) {
           />
           <button
             className="search-form__btn"
-            type="submit"
-            onClick={handleSubmit}
+            type="button"
+            onClick={handleSearch}
             disabled={!isValid}
           >
             Search
