@@ -85,11 +85,18 @@ function App() {
       handleRigisterModalOpen();
       return;
     }
-
     if (savedNews.some((news) => news.link === link)) {
       setSavedNews((prev) => prev.filter((news) => news.link !== link));
+      const newsToDelete = savedNews.find((news) => news.link === link);
+      if (newsToDelete) {
+        deleteNewsItem(newsToDelete._id, token)
+          .then(() => {
+            console.log("Deleted Successfully");
+          })
+          .catch(console.error);
+      }
     } else {
-      saveItems(keyword, title, text, date, source, image, link)
+      saveItems(keyword, title, text, date, source, image, link, token)
         .then((data) => {
           setSavedNews([data, ...savedNews]);
         })
