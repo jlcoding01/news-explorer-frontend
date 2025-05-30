@@ -6,4 +6,4 @@ The app features a responsive design and integrates with external News API to pr
 
 Using modern web developement technologies: React for the frontend, Node.js for the backend, and MongoDB for the database management.
 
-[Home Page](https://newsexplorerapp.jumpingcrab.com)
+[Home Page](https://news-explorer-frontend-umber.vercel.app/)
